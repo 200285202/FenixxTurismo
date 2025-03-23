@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitrine de Viagens</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #fff;
+            color: #333;
+        }
+
+       
+        .header {
+  background: #FF6B35; /* Mantém o fundo laranja */
+  color: black; /* Deixa o texto preto */
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Espaço entre logo e texto */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Dá um espaçamento entre logo e texto */
+}
+
+.logo-img {
+  width: 50px; /* Ajuste conforme necessário */
+  height: auto;
+}
+
+.logo-text {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: black; /* Mantém o nome "TravelWorld" preto */
+}
+
+    .bola{
+        text-align: center;
+    }
+
+
+        .months-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .month-btn {
+            background: #FF6B35;
+            border: none;
+            padding: 20px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .month-btn:hover {
+            background: #cc5522;
+        }
+
+        .trips-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .trip-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .trip-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .trip-details {
+            padding: 15px;
+        }
+
+        .trip-price {
+            color: #FF6B35;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .footer {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .months-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+
+
+    <div class="header">
+        <div class="logo-container">
+          <img src="logo.png" alt="Logo" class="logo-img">
+          <div class="logo-text">Fenixx Turismo</div>
+        </div>
+      </div>
+      
+      <div class="bola">
+      <h1>Destinos do Mês</h1>
+    </div>
+
+    <div class="months-grid" id="monthsGrid">
+        <!-- Botões dos meses serão gerados aqui -->
+    </div>
+
+    <div id="tripsContainer" class="trips-container"></div>
+
+    <div class="footer">
+        <p>© 2024 Agência de Viagens</p>
+    </div>
+
+    <script>
+        const viagens = {
+            "Janeiro": [ ],
+            "Fevereiro": [],
+            "Março": [
+                { imagem: "img2.jpg", titulo: "Carnaval no Rio", data: "05/03/2024", preco: "R$ 1.899" }
+            ],
+            "Abril": [
+    { imagem: "img2.jpg", titulo: "Arraial do Cabo e Cabo Frio", data: "11 a 13/04", preco: "R$  550.00" },
+    { imagem: "img3.jpg", titulo: "Ilha do Mel ", data: "12/04", preco: "350.00" },
+    { imagem: "img3.jpg", titulo: "Ilha Bela", data: " 13/04", preco: "R$ 167.00" },
+    { imagem: "img3.jpg", titulo: "Arraial do Cabo e Cabo Frio", data: "11 a 13/04", preco: "R$ 620.00" },
+    { imagem: "img3.jpg", titulo: "Arraial do Cabo e Macaé ", data: " 17 a 21/04 ", preco: "R$  880.00 " },
+    { imagem: "img3.jpg", titulo: "Castelo Park ", data: "20/04", preco: "R$ 165.00" },
+    { imagem: "img3.jpg", titulo: "Passeio de barco incluso ", data: "20/04", preco: "R$  287.00" },
+    { imagem: "img3.jpg", titulo: "Ilha Bela", data: " 20/04", preco: "R$ 180.00" },
+    { imagem: "img3.jpg", titulo: "Lavrinhas +Rancho do Zé João ", data: " 20/04", preco: "R$ 159.00" },
+    { imagem: "img3.jpg", titulo: "Rio de janeiro", data: " 27/04", preco: "R$ 210.00" },
+    { imagem: "img3.jpg", titulo: "Monte Verde", data: " 27/04", preco: "R$  167.00" },
+    { imagem: "img3.jpg", titulo: "Paraty-rj", data: " 27/04", preco: "R$ 287.00" }
+    
+],
+
+            "Maio": [
+                { imagem: "img2.jpg", titulo: "Arraial do Cabo e Cabo Frio ", data: "09 a 11/05", preco: "R$ 550.00" },
+                { imagem: "img2.jpg", titulo: "Ilha do Mel", data: "10/05", preco: "R$ 350.00" },
+                { imagem: "img2.jpg", titulo: "Passeio de Balão", data: "10/05", preco: "R$  697.00" },
+                { imagem: "img2.jpg", titulo: " Búzios", data: "05/03/2024", preco: "R$  580.00" },
+                { imagem: "img2.jpg", titulo: "Angra dos Reis ", data: "18/05", preco: "R$ 287.00" },
+                { imagem: "img2.jpg", titulo: "Ibitipoca - MG", data: "23 a 25/05 ", preco: "R$  697.00" },
+                { imagem: "img2.jpg", titulo: "Monte Verde", data: " 25/05", preco: "R$ 187.00" }
+            ],
+            "Junho": [
+                { imagem: "img2.jpg", titulo: "Ilha Do Mel", data: " 14/05", preco: "R$ 350.00" },
+                { imagem: "img2.jpg", titulo: "Arraial do Cabo e Cabo Frio ", data: "26 a 28/06", preco: "R$ 550.00" }
+            ],
+            "Julho": [
+                { imagem: "img2.jpg", titulo: "Passeio de Balão", data: "12/07", preco: "R$  697.00" },
+                { imagem: "img2.jpg", titulo: "Beto Carrero World e Balneário Camboriú ", data: "18 a 20/07 ", preco: "R$ 590.00 " },
+                { imagem: "img2.jpg", titulo: "Foz do Iguaçu Paraguai e Argentina ", data: "11 a 13/07", preco: "R$  660.00" }
+            ],
+            "Agosto": [
+                { imagem: "img2.jpg", titulo: "Rio de Janeiro + Cacique de Ramos", data: "15 a 17/08 ", preco: "R$  580.00 " },
+                { imagem: "img2.jpg", titulo: "ARRAIAL DO CABO E BÚZIOS ", data: "22 A 24/08", preco: "R$ 580.00 " },
+                { imagem: "img2.jpg", titulo: "Foz do Iguaçu Paraguai e Argentina", data: "29 a 31/08", preco: "R$ 660.00" }
+            ],
+            "Setembro": [
+                { imagem: "img2.jpg", titulo: "Passeio de Balão ", data: "20/09 ", preco: "R$  697.00" },
+                { imagem: "img2.jpg", titulo: "Arraial do Cabo e Macaé ", data: "26 a 28/09", preco: "R$  540.00" },
+                { imagem: "img2.jpg", titulo: "Foz do Iguaçu Paraguai e Argentina ", data: "26 a 28/09", preco: "R$  660.00" }
+            ],
+            "Outubro": [
+                { imagem: "img2.jpg", titulo: "ARRAIAL DO CABO E CABO FRIO ", data: "17 a 19/11", preco: "R$ 620.00" }
+            ],
+            "Novembro": [
+                { imagem: "img2.jpg", titulo: " Ibitipoca - MG ", data: " 07 a 09/11", preco: "R$ 697.00" },
+                { imagem: "img2.jpg", titulo: "Arraial do Cabo e Cabo Frio ", data: " 12 a 14/12 ", preco: "R$ 620.00" },
+                { imagem: "img2.jpg", titulo: "Passeio de Balão ", data: "08/11", preco: "R$ 697.00" }
+
+            ],
+            "Dezembro": [
+                { imagem: "img2.jpg", titulo: "Cruzeiro MSC Preziosa Santos x Búzios ", data: "12 a 15/12", preco: "R$ 3.000 " },
+                { imagem: "img2.jpg", titulo: "Foz do Iguaçu Paraguai e Argentina", data: "19 a 21/07", preco: "R$  660.00" },
+                { imagem: "img2.jpg", titulo: "Caldas Novas - 𝗡𝗔𝗧𝗔𝗟 ", data: " 22 a 26/12", preco: "R$ 1.899" },
+                { imagem: "img2.jpg", titulo: "𝗥𝗘́𝗩𝗘𝗜𝗟𝗟𝗢𝗡 - Arraial do Cabo e Macaé", data: " 30 𝗗𝗘 𝗗𝗘𝗭𝗘𝗠𝗕𝗥𝗢 𝟮𝟬𝟮5 𝗔 4 𝗗𝗘 𝗝𝗔𝗡𝗘𝗜𝗥𝗢 𝗗𝗘 𝟮𝟬𝟮6", preco: "R$ 1.997" }
+            ],
+            // Preencha os outros meses
+        };
+
+        function criarBotoesMeses() {
+            const meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
+                         "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+            
+            const grid = document.getElementById('monthsGrid');
+            meses.forEach(mes => {
+                const btn = document.createElement('button');
+                btn.className = 'month-btn';
+                btn.textContent = mes;
+                btn.onclick = () => mostrarViagens(mes);
+                grid.appendChild(btn);
+            });
+        }
+
+        function mostrarViagens(mes) {
+            const container = document.getElementById('tripsContainer');
+            container.innerHTML = '';
+
+            if(viagens[mes].length === 0) {
+                container.innerHTML = '<p style="color: #FF6B35; font-size: 1.5em;">Acabou!</p>';
+                return;
+            }
+
+            viagens[mes].forEach(viagem => {
+                const card = `
+                    <div class="trip-card">
+                        <img src="${viagem.imagem}" class="trip-image">
+                        <div class="trip-details">
+                            <h3>${viagem.titulo}</h3>
+                            <p>Data: ${viagem.data}</p>
+                            <p class="trip-price">${viagem.preco}</p>
+                            <button class="month-btn" style="width: 100%">Ver mais</button>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        // Inicialização
+        criarBotoesMeses();
+        mostrarViagens("Janeiro"); // Mostra janeiro por padrão
+    </script>
+</body>
+</html>
